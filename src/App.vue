@@ -1,23 +1,25 @@
 <template>
   <div id="app">
-    <addTodo />
+    <AddTodo />
+    <FilterTodos />
     <Todos />
   </div>
 </template>
 
 <script>
 import Todos from '@/components/Todos';
-import addTodo from '@/components/addTodo';
+import AddTodo from '@/components/AddTodo';
+import FilterTodos from '@/components/FilterTodos';
 
 export default {
   name: 'App',
-  components: { Todos, addTodo },
+  components: { Todos, AddTodo, FilterTodos },
 };
 </script>
 
 <style>
 body {
-  background: #5E81AC;
+  background: #5e81ac;
 }
 
 .container {

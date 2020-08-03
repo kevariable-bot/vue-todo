@@ -17,8 +17,8 @@ import { mapActions } from 'vuex';
 export default {
   name: 'addTodos',
   data() {
-    return { 
-      title: '' 
+    return {
+      title: '',
     };
   },
   methods: {
@@ -27,7 +27,7 @@ export default {
       e.preventDefault();
 
       this.addTodos(this.title);
-    }
+    },
   },
 };
 </script>
