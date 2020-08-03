@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3>It's Today</h3>
+    <h3>It's Todos</h3>
 
     <div class="todos">
       <div class="todo" v-for="{ title, id } in allTodos" :key="id">
@@ -12,11 +12,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Todos',
   computed: mapGetters(['allTodos']),
+  methods: {
+    ...mapActions(['fetchTodos']),
+  },
+  created() {
+    this.fetchTodos();
+  },
 };
 </script>
 
@@ -52,7 +58,7 @@ export default {
 
 .todo i {
   margin-left: 5px;
-  color: #BF616A;
+  color: #bf616a;
   font-weight: bold;
   font-size: 20px;
 }
