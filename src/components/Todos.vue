@@ -47,6 +47,7 @@ export default {
   color: #bf616a;
   font-weight: bold;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .todo p {
