@@ -1,4 +1,7 @@
 <template>
+<div>
+  <loader v-if="loader" object="#81a1c1" color1="#ffffff" color2="#17fd3d" size="5" speed="2" bg="#343a40" objectbg="#2e3440" opacity="80" name="dots"></loader>
+
   <div class="container">
     <h3>It's Todos</h3>
 
@@ -9,6 +12,7 @@
       </button>
     </form>
   </div>
+</div>
 </template>
 
 <script>
@@ -19,14 +23,19 @@ export default {
   data() {
     return {
       title: '',
+      loader: false,
     };
   },
   methods: {
     ...mapActions(['addTodos']),
-    onSubmit(e) {
+    async onSubmit(e) {
+      this.loader = true;
+
       e.preventDefault();
 
-      this.addTodos(this.title);
+      await this.addTodos(this.title);
+
+      this.loader = false;
     },
   },
 };

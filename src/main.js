@@ -1,6 +1,10 @@
 import Vue from 'vue';
+import loader from 'vue-ui-preloader';
+
 import App from './App.vue';
 import store from './store';
+
+Vue.use(loader);
 
 Vue.config.productionTip = false;
 

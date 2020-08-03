@@ -1,9 +1,23 @@
 <template>
-  <div class="container">
-    <div class="todos">
-      <div class="todo" v-for="{ title, id } in allTodos" :key="id">
-        <p>{{ title }}</p>
-        <i class="fa fa-times" @click="deleteTodos(id)"></i>
+  <div>
+    <loader
+      v-if="loader"
+      object="#81a1c1"
+      color1="#ffffff"
+      color2="#17fd3d"
+      size="5"
+      speed="2"
+      bg="#343a40"
+      objectbg="#2e3440"
+      opacity="80"
+      name="dots"
+    ></loader>
+    <div class="container">
+      <div class="todos">
+        <div class="todo" v-for="{ title, id } in allTodos" :key="id">
+          <p>{{ title }}</p>
+          <i class="fa fa-times" @click="loaderDeleteTodos(id)"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -14,12 +28,25 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Todos',
+  data() {
+    return { loader: false };
+  },
   computed: mapGetters(['allTodos']),
   methods: {
     ...mapActions(['fetchTodos', 'deleteTodos']),
+    async loaderFetchTodos() {
+      this.loader = true;
+      await this.fetchTodos();
+      this.loader = false;
+    },
+    async loaderDeleteTodos(id) {
+      this.loader = true;
+      await this.deleteTodos(id);
+      this.loader = false;
+    },
   },
   created() {
-    this.fetchTodos();
+    this.loaderFetchTodos();
   },
 };
 </script>
