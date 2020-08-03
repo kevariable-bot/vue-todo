@@ -1,11 +1,9 @@
 <template>
   <div class="container">
-    <h3>It's Todos</h3>
-
     <div class="todos">
       <div class="todo" v-for="{ title, id } in allTodos" :key="id">
         <p>{{ title }}</p>
-        <i class="fa fa-times"></i>
+        <i class="fa fa-times" @click="deleteTodos(id)"></i>
       </div>
     </div>
   </div>
@@ -18,7 +16,7 @@ export default {
   name: 'Todos',
   computed: mapGetters(['allTodos']),
   methods: {
-    ...mapActions(['fetchTodos']),
+    ...mapActions(['fetchTodos', 'deleteTodos']),
   },
   created() {
     this.fetchTodos();
@@ -27,18 +25,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 80%;
-  margin: auto;
-}
-
-.container h3 {
-  color: #2e3440;
-  font-family: arial;
-  font-weight: 100;
-  font-size: 35px;
-}
-
 .todos {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
