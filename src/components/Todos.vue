@@ -54,7 +54,8 @@ export default {
 <style scoped>
 .todos {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+
   grid-gap: 10px;
 }
 
@@ -79,5 +80,17 @@ export default {
 
 .todo p {
   padding-right: 10px;
+}
+
+@media only screen and (min-width: 500px) {
+  .todos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .todos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 </style>
