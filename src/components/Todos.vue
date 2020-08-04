@@ -13,8 +13,21 @@
       name="dots"
     ></loader>
     <div class="container">
+
+      <div>
+        <ul>
+          <li>Double click to check</li>
+        </ul>
+      </div>
+
       <div class="todos">
-        <div class="todo" v-for="{ title, id } in allTodos" :key="id">
+        <div
+          class="todo"
+          v-for="{ title, id, completed } in allTodos"
+          :key="id"
+          @dblclick="loaderOnDblclick(id, title, completed)"
+          :class="{ 'has-completed': completed }"
+        >
           <p>{{ title }}</p>
           <i class="fa fa-times" @click="loaderDeleteTodos(id)"></i>
         </div>
@@ -33,7 +46,7 @@ export default {
   },
   computed: mapGetters(['allTodos']),
   methods: {
-    ...mapActions(['fetchTodos', 'deleteTodos']),
+    ...mapActions(['fetchTodos', 'deleteTodos', 'dblclickTodos']),
     async loaderFetchTodos() {
       this.loader = true;
       await this.fetchTodos();
@@ -43,6 +56,15 @@ export default {
       this.loader = true;
       await this.deleteTodos(id);
       this.loader = false;
+    },
+    async loaderOnDblclick(id, title, completed) {
+      const data = {
+        id,
+        title,
+        completed: !completed,
+      };
+
+      this.dblclickTodos(data);
     },
   },
   created() {
@@ -92,5 +114,9 @@ export default {
   .todos {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+.has-completed {
+  background: #bf616a;
 }
 </style>

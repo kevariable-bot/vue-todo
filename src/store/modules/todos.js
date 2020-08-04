@@ -38,6 +38,13 @@ const actions = {
 
     commit('setTodos', res.data);
   },
+  async dblclickTodos({ commit }, data) {
+    const res = await Axios.put(
+      `https://jsonplaceholder.typicode.com/todos/${data.id}`, data
+    );
+
+    commit('updateDblclick', res.data);
+  },
 };
 
 const mutations = {
@@ -45,6 +52,13 @@ const mutations = {
   newTodo: (state, data) => state.todos.unshift(data),
   removeTodo: (state, id) =>
     (state.todos = state.todos.filter(todo => todo.id !== id)),
+  updateDblclick: (state, data) => {
+    const index = state.todos.findIndex(todo => todo.id === data.id);
+
+    if (index !== -1) {
+      state.todos.splice(index, 1, data);
+    }
+  },
 };
 
 export default { state, getters, actions, mutations };
